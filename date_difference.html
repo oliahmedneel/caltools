@@ -1,0 +1,1595 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Free Date Difference Calculator. Find the exact number of days, weeks, months, and years between any two dates instantly.">
+  <title>Date Difference Calculator - Find Days Between Two Dates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem("ageCalculatorTheme");
+      document.documentElement.setAttribute("data-theme", savedTheme === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f3f5f8;
+      --card: #ffffff;
+      --text: #121826;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #ef8f5f;
+      --primary-hover: #e37f50;
+      --shadow: 0 18px 34px rgba(239, 143, 95, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1200px, 94%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #f0f2f5;
+      background: #fff;
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 56px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 600;
+      font-size: 18px;
+      color: #e1885c;
+    }
+
+    .brand-dot { width: 22px; height: 22px; border-radius: 4px; object-fit: contain; }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .menu a:hover {
+      color: #111827;
+    }
+
+    .menu-cta {
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--card);
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 56px 0 94px;
+      text-align: center;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 28px;
+      align-items: start;
+      scroll-margin-top: 80px;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-layout {
+        grid-template-columns: 1fr 820px 1fr;
+        justify-content: center;
+      }
+
+      .card {
+        width: 820px;
+        margin: 0 auto;
+      }
+    }
+
+    .ad-placeholder {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+      transition: margin-top 0.3s ease;
+    }
+
+    .ad-placeholder.vertical-ad {
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0;
+    }
+
+    .suggestions-card {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: left;
+      transition: margin-top 0.3s ease;
+      animation: bgPulse 1.5s infinite alternate ease-in-out;
+    }
+
+    .suggestions-card:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes bgPulse {
+      from { background-color: var(--card); }
+      to { background-color: #f26f3e; }
+    }
+
+    #sidebarLeft, #sidebarRight {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .suggestions-card h4 {
+      margin: 0 0 16px;
+      font-size: 14px;
+    }
+
+    .suggest-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .suggest-btn {
+      display: block;
+      padding: 10px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      max-width: 700px;
+      margin-inline: auto;
+    }
+
+    .subtitle {
+      margin: 14px auto 0;
+      max-width: 560px;
+      color: #6b7280;
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    .card {
+      margin: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 18px 16px 14px;
+      text-align: left;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 8px;
+      background: #f39a6a;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .card-title {
+      margin: 3px 0 10px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #374151;
+    }
+
+    .hint {
+      display: block;
+      margin-top: 5px;
+      color: #a1a1aa;
+      font-size: 10px;
+    }
+
+    .date-field {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .date-input {
+      width: 100%;
+      padding: 9px 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fff;
+      color: #4b5563;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .date-input:focus {
+      border-color: #f3aa83;
+      box-shadow: 0 0 0 2px #fee7d8;
+    }
+
+    .date-btn {
+      width: 30px;
+      min-width: 30px;
+      height: 30px;
+      border: 1px solid #eceef2;
+      border-radius: 8px;
+      background: #fff;
+      color: #111827;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      line-height: 1;
+      transition: all 0.2s ease;
+    }
+
+    .date-btn:hover, .date-btn.active {
+      background: var(--bg-soft);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .date-btn:active {
+      transform: scale(0.95);
+    }
+
+    .date-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .date-picker {
+      position: absolute;
+      z-index: 50;
+      width: 264px;
+      border: 1px solid #eceef2;
+      border-radius: 14px;
+      background: #f8fafc;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.18);
+      padding: 10px 8px 8px;
+    }
+
+    .date-picker[hidden] {
+      display: none;
+    }
+
+    .picker-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .picker-select {
+      width: 100%;
+      border: 1px solid #d9dee8;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-family: inherit;
+      font-size: 14px;
+      background: #eef2f7;
+      color: #111827;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .picker-select:hover {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+    }
+
+    .picker-year {
+      position: relative;
+    }
+
+    .picker-year-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .picker-year-trigger::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-1px);
+      flex: 0 0 auto;
+      margin-left: 10px;
+    }
+
+    .picker-year-trigger[aria-expanded="true"]::after {
+      transform: rotate(-135deg) translateY(-1px);
+    }
+
+    .picker-year-dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 100%;
+      border: 1px solid #d9dee8;
+      border-radius: 10px;
+      background: #eef2f7;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+      z-index: 20;
+    }
+
+    .picker-year-options {
+      max-height: 384px;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .picker-year-options::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    .picker-year-option {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #111827;
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .picker-year-option:hover,
+    .picker-year-option.is-active {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .picker-month-option {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #111827;
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .picker-month-option:hover,
+    .picker-month-option.is-active {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .picker-nav {
+      display: grid;
+      grid-template-columns: 28px 1fr 28px;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      padding-inline: 2px;
+    }
+
+    .picker-nav-btn {
+      border: 0;
+      background: transparent;
+      font-size: 18px;
+      line-height: 1;
+      color: #111827;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.2s ease;
+    }
+
+    .picker-nav-btn:hover {
+      color: #f39a6a;
+      transform: scale(1.2);
+    }
+
+    .picker-title {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #111827;
+      margin: 0;
+    }
+
+    .picker-weekdays,
+    .picker-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+    }
+
+    .picker-weekdays {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .picker-days {
+      gap: 2px;
+    }
+
+    .picker-day {
+      border: 0;
+      background: transparent;
+      height: 34px;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 13px;
+      color: #111827;
+      cursor: pointer;
+    }
+
+    .picker-day:hover {
+      background: #edf2f8;
+    }
+
+    .picker-day.muted {
+      color: #c0c7d2;
+    }
+
+    .picker-day.selected {
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+
+    .picker-day.today {
+      outline: 1px solid #f3aa83;
+      outline-offset: -1px;
+    }
+
+    .btn-calc {
+      width: 100%;
+      margin-top: 15px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-calc:hover {
+      background: var(--primary-hover);
+    }
+
+    .error {
+      display: none;
+      margin-top: 10px;
+      color: #b91c1c;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .result-shell {
+      display: none;
+      margin-top: 16px;
+      border: 1px solid #ebedf2;
+      border-radius: 16px;
+      background: #f6f1ee;
+      padding: 14px;
+    }
+
+    .result-hero {
+      border: 1px solid #e7e9ee;
+      border-radius: 14px;
+      background: #fffdfc;
+      text-align: center;
+      padding: 18px 12px 16px;
+    }
+
+    .result-kicker {
+      margin: 0;
+      color: #e0895f;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+
+    .result-main {
+      margin-top: 10px;
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .result-main span {
+      font-size: 58px;
+      color: #f26f3e;
+      font-weight: 700;
+    }
+
+    .result-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .panel {
+      border: 1px solid #e7e9ee;
+      border-radius: 12px;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .panel h4 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .kv {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 14px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .kv:last-child {
+      border-bottom: none;
+    }
+
+    .kv .k {
+      color: #64748b;
+    }
+
+    .kv .v {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .insight-strip {
+      margin-top: 12px;
+      border: 1px solid #e7e9ee;
+      border-radius: 12px;
+      background: #fff;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .insight-item {
+      text-align: center;
+    }
+
+    .insight-label {
+      color: #8b95a7;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .insight-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .result-actions {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .ghost-btn {
+      border: 1px solid #dce1ea;
+      background: #f9fafb;
+      color: #1f2937;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    html[data-theme="dark"] .ghost-btn {
+      background: var(--card);
+      border-color: var(--line);
+      color: var(--text);
+    }
+    html[data-theme="dark"] .ghost-btn:hover {
+      background: #1d2840;
+    }
+    .privacy {
+      color: #f26f3e;
+      font-size: 10px;
+      margin-top: 8px;
+    }
+
+    section.content {
+      margin-top: 0;
+      background: #f4f6f8;
+      padding: 82px 0 70px;
+      scroll-margin-top: 88px;
+    }
+
+    h2 {
+      margin: 0 0 11px;
+      font-size: clamp(2rem, 3vw, 2.45rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .text-wrap {
+      width: min(820px, 92%);
+      margin: 0 auto;
+    }
+
+    .about-title {
+      text-align: left;
+      font-size: clamp(2rem, 2.8vw, 2.4rem);
+      margin-bottom: 20px;
+    }
+
+    .text-block {
+      color: #2f3645;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin-bottom: 16px;
+      font-size: 13px;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    details {
+      border: 0;
+      border-bottom: 1px solid #e5e7eb;
+      background: transparent;
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #111827;
+      font-size: 15px;
+      list-style: none;
+      padding: 18px 0;
+      position: relative;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    details p {
+      margin: -4px 0 14px;
+      color: #4b5563;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    footer {
+      margin: 0;
+      border-top: 1px solid #e5e7eb;
+      background: #f4f6f8;
+      padding: 18px 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-wrap {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-left {
+      justify-self: start;
+      color: #6b7280;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #6b7280;
+    }
+
+    .footer-social {
+      justify-self: end;
+      display: flex;
+      gap: 10px;
+      color: #9ca3af;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .menu a:not(:first-child):not(:last-child) {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 34px;
+        padding-bottom: 64px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insight-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      section.content {
+        padding: 64px 0 52px;
+      }
+
+      .footer-wrap {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-left,
+      .footer-social {
+        justify-self: center;
+      }
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card: #111827;
+      --text: #e5edf7;
+      --muted: #94a3b8;
+      --line: #243041;
+      --primary: #f29a6b;
+      --shadow: 0 18px 34px rgba(2, 6, 23, 0.45);
+    }
+
+    html[data-theme="dark"] .topbar,
+    html[data-theme="dark"] footer {
+      background: #0b1220;
+    }
+
+    html[data-theme="dark"] section.content,
+    html[data-theme="dark"] .result-shell {
+      background: #111827;
+    }
+
+    html[data-theme="dark"] .card,
+    html[data-theme="dark"] .panel,
+    html[data-theme="dark"] .result-hero,
+    html[data-theme="dark"] .insight-strip,
+    html[data-theme="dark"] .menu-cta,
+    html[data-theme="dark"] .date-input {
+      background: var(--card);
+      border-color: var(--line);
+    }
+
+    html[data-theme="dark"] .brand,
+    html[data-theme="dark"] .menu-cta,
+    html[data-theme="dark"] .date-input,
+    html[data-theme="dark"] h1,
+    html[data-theme="dark"] h2,
+    html[data-theme="dark"] h3,
+    html[data-theme="dark"] h4,
+    html[data-theme="dark"] .result-main,
+    html[data-theme="dark"] .kv .v,
+    html[data-theme="dark"] .insight-value,
+    html[data-theme="dark"] .footer-left,
+    html[data-theme="dark"] .footer-nav {
+      color: var(--text);
+    }
+
+    html[data-theme="dark"] .subtitle,
+    html[data-theme="dark"] label,
+    html[data-theme="dark"] .text-block,
+    html[data-theme="dark"] .kv .k,
+    html[data-theme="dark"] .insight-label,
+    html[data-theme="dark"] summary,
+    html[data-theme="dark"] details p,
+    html[data-theme="dark"] .footer-wrap,
+    html[data-theme="dark"] .footer-social,
+    html[data-theme="dark"] .hint {
+      color: var(--muted);
+    }
+
+    html[data-theme="dark"] .result-kicker,
+    html[data-theme="dark"] .result-main span {
+      color: var(--primary);
+    }
+
+    html[data-theme="dark"] .kv {
+      border-bottom-color: var(--line);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><img src="logo.png" class="brand-dot" alt="Calculator Tools Logo"><span>Date Difference Calculator</span></a>
+      <nav class="menu">
+        <a href="index.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+        <button class="menu-cta" id="themeToggle" type="button" aria-label="Toggle dark mode">Dark Mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <h1>Date Difference Calculator</h1>
+        <p class="subtitle">Find the exact number of days, weeks, months, and years between any two dates. Perfect for deadlines, anniversaries, project planning, and more.</p>
+
+        <div class="hero-layout" id="layoutWrapper">
+          <div id="sidebarLeft"></div>
+
+          <div id="centerColumn">
+            <div class="card" id="calculator">
+              <h3 class="card-title">Find Difference Between Two Dates</h3>
+              <div class="form-grid">
+                <div>
+                  <label for="d1">Start Date</label>
+                  <div class="date-field">
+                    <input id="d1" class="date-input" type="text" inputmode="numeric" placeholder="YYYY-MM-DD" autocomplete="off">
+                    <button class="date-btn" type="button" data-target="d1" aria-label="Open date picker for start date">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="3.5" y="5.5" width="17" height="15" rx="2" stroke="currentColor" stroke-width="1.7" />
+                        <path d="M7 3.8V7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                        <path d="M17 3.8V7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                        <path d="M3.5 9.5H20.5" stroke="currentColor" stroke-width="1.7" />
+                      </svg>
+                    </button>
+                  </div>
+                  <span class="hint">Select or type the start date</span>
+                </div>
+                <div>
+                  <label for="d2">End Date</label>
+                  <div class="date-field">
+                    <input id="d2" class="date-input" type="text" inputmode="numeric" placeholder="YYYY-MM-DD" autocomplete="off">
+                    <button class="date-btn" type="button" data-target="d2" aria-label="Open date picker for end date">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="3.5" y="5.5" width="17" height="15" rx="2" stroke="currentColor" stroke-width="1.7" />
+                        <path d="M7 3.8V7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                        <path d="M17 3.8V7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                        <path d="M3.5 9.5H20.5" stroke="currentColor" stroke-width="1.7" />
+                      </svg>
+                    </button>
+                  </div>
+                  <span class="hint">Select or type the end date</span>
+                </div>
+              </div>
+              <div class="date-picker" id="datePicker" hidden>
+                <div class="picker-head">
+                  <div class="picker-year" id="pickerMonthWrap">
+                    <button class="picker-select picker-year-trigger" id="pickerMonth" type="button" aria-label="Select month" aria-haspopup="listbox" aria-expanded="false"></button>
+                    <div class="picker-year-dropdown" id="pickerMonthDropdown" hidden>
+                      <div class="picker-year-options" id="pickerMonthOptions" role="listbox" aria-label="Select month"></div>
+                    </div>
+                  </div>
+                  <div class="picker-year" id="pickerYearWrap">
+                    <button class="picker-select picker-year-trigger" id="pickerYear" type="button" aria-label="Select year" aria-haspopup="listbox" aria-expanded="false"></button>
+                    <div class="picker-year-dropdown" id="pickerYearDropdown" hidden>
+                      <div class="picker-year-options" id="pickerYearOptions" role="listbox" aria-label="Select year"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="picker-nav">
+                  <button class="picker-nav-btn" id="pickerPrev" type="button" aria-label="Previous month">&lt;</button>
+                  <p class="picker-title" id="pickerTitle"></p>
+                  <button class="picker-nav-btn" id="pickerNext" type="button" aria-label="Next month">&gt;</button>
+                </div>
+                <div class="picker-weekdays">
+                  <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                </div>
+                <div class="picker-days" id="pickerDays"></div>
+              </div>
+              <p class="error" id="error"></p>
+
+              <div class="result-shell" id="result">
+                <div class="result-hero">
+                  <p class="result-kicker">Total Difference</p>
+                  <div class="result-main"><span id="totalDaysOut">0</span> days</div>
+                  <div class="result-actions">
+                    <button class="ghost-btn" id="copyBtn" type="button">Copy Result</button>
+                    <button class="ghost-btn" id="shareBtn" type="button">Share</button>
+                  </div>
+                </div>
+                <div class="result-grid">
+                  <div class="panel">
+                    <h4>Breakdown</h4>
+                    <div class="kv"><span class="k">Years</span><span class="v" id="yearsOut">—</span></div>
+                    <div class="kv"><span class="k">Months</span><span class="v" id="monthsOut">—</span></div>
+                    <div class="kv"><span class="k">Weeks</span><span class="v" id="weeksOut">—</span></div>
+                    <div class="kv"><span class="k">Days</span><span class="v" id="daysOut">—</span></div>
+                  </div>
+                  <div class="panel">
+                    <h4>Date Details</h4>
+                    <div class="kv"><span class="k">Start Date</span><span class="v" id="startOut">—</span></div>
+                    <div class="kv"><span class="k">End Date</span><span class="v" id="endOut">—</span></div>
+                    <div class="kv"><span class="k">Start Day</span><span class="v" id="startDayOut">—</span></div>
+                    <div class="kv"><span class="k">End Day</span><span class="v" id="endDayOut">—</span></div>
+                  </div>
+                </div>
+                <div class="insight-strip">
+                  <div class="insight-item">
+                    <div class="insight-label">Hours</div>
+                    <div class="insight-value" id="hoursOut">—</div>
+                  </div>
+                  <div class="insight-item">
+                    <div class="insight-label">Minutes</div>
+                    <div class="insight-value" id="minutesOut">—</div>
+                  </div>
+                  <div class="insight-item">
+                    <div class="insight-label">Seconds</div>
+                    <div class="insight-value" id="secondsOut">—</div>
+                  </div>
+                </div>
+              </div>
+              <p class="privacy">Privacy note: all calculations happen in your browser. Nothing is sent to a server.</p>
+            </div>
+
+            <div class="ad-placeholder" id="adBox">
+              <div style="border: 1px dashed #cbd5e1; padding: 10px; border-radius: 8px; background: #fafafa;">
+                <p style="color: var(--muted); font-size: 12px; margin: 0 0 8px;">ADVERTISEMENT</p>
+                <div id="adGraphic" style="margin: 0 auto; width: 100%; max-width: 728px; height: 90px; background: #eaedf2; display: flex; align-items: center; justify-content: center; color: #64748b; border: 1px solid #e2e8f0;">
+                  <strong>Responsive Banner Ad (728x90)</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="sidebarRight">
+            <div class="suggestions-card" id="suggestions">
+              <h4>Other Calculators</h4>
+              <div class="suggest-list">
+                <a href="age_calculator.html" class="suggest-btn">Age Calculator</a>
+                <a href="bmi_calculator.html" class="suggest-btn">BMI Calculator</a>
+                <a href="bmr_calculator.html" class="suggest-btn">BMR Calculator</a>
+                <a href="percentage_calculator.html" class="suggest-btn">Percentage Calculator</a>
+                <a href="loan_emi_calculator.html" class="suggest-btn">Loan EMI Calculator</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content" id="about">
+      <div class="text-wrap">
+        <h2 class="about-title">What is a Date Difference Calculator?</h2>
+        <div class="text-block">
+          A date difference calculator is a tool that computes the exact duration between two calendar dates. Rather
+          than counting days manually on a calendar — a process that is tedious and error-prone — a digital calculator
+          handles all the complex arithmetic instantly, accounting for varying month lengths, leap years, and other
+          calendar irregularities.
+        </div>
+        <div class="text-block">
+          The most fundamental output is the total number of days between the two dates. However, a comprehensive date
+          difference tool goes further by breaking this down into years, months, weeks, days, hours, minutes, and even
+          seconds. This granular level of detail is useful for a wide range of personal and professional applications.
+        </div>
+        <div class="text-block">
+          One of the most common uses is calculating the number of days until or since an important event. People use
+          this for countdowns to weddings, birthdays, and anniversaries, as well as to determine how long ago a
+          historical event occurred. Project managers use it to track deadlines and measure how many working days remain
+          in a project schedule.
+        </div>
+        <div class="text-block">
+          Legal and financial professionals rely on date difference calculations for calculating contract durations,
+          statute of limitations periods, payment due dates, and interest accrual periods. In healthcare, it is used to
+          calculate gestational age, medication durations, and patient recovery timelines.
+        </div>
+        <div class="text-block">
+          The challenge in date arithmetic lies in the irregular nature of our calendar. Months have varying numbers of
+          days (28, 29, 30, or 31), and leap years add an extra day to February every four years. A reliable date
+          difference calculator handles all of these edge cases automatically, ensuring you always get an accurate
+          result.
+        </div>
+        <div class="text-block">
+          Whether you need a quick answer to how many days are left until your next vacation or a precise calculation
+          for a business contract, our date difference calculator provides instant, accurate results across any time
+          range — from a single day to thousands of years — without any manual effort.
+        </div>
+      </div>
+    </section>
+
+    <section class="content" id="faq">
+      <div class="text-wrap">
+        <h2>Frequently Asked Questions</h2>
+        <details>
+          <summary>Does this calculator account for leap years?</summary>
+          <p>Yes. The calculation is based on actual calendar dates, so leap years are automatically accounted for.
+            February 29th is correctly handled as an extra day in any leap year that falls within your date range.</p>
+        </details>
+        <details>
+          <summary>Can I calculate the difference between past and future dates?</summary>
+          <p>Absolutely. You can enter any valid start and end date — past, present, or future. The calculator always
+            returns the absolute difference, so the order of the two dates does not affect the result.</p>
+        </details>
+        <details>
+          <summary>Can this be used to count business days or working days?</summary>
+          <p>This calculator counts all calendar days including weekends and public holidays. For business day
+            calculations, you would need to subtract the weekends manually, or use a dedicated business days calculator.
+          </p>
+        </details>
+        <details>
+          <summary>What is the maximum date range this calculator supports?</summary>
+          <p>The calculator uses JavaScript's native Date object, which supports dates from approximately 100 million
+            days before or after January 1, 1970. In practice, it works accurately for any historically relevant date
+            range.</p>
+        </details>
+        <details>
+          <summary>Can I use this to calculate my age or time since birth?</summary>
+          <p>Yes. Enter your date of birth as the start date and today's date as the end date. However, for more
+            detailed age information including zodiac signs, life stage, and heartbeats, our dedicated Age Calculator on
+            the home page provides a richer experience.</p>
+        </details>
+        <details>
+          <summary>Is the calculation done on my device?</summary>
+          <p>Yes. All date calculations are performed entirely within your browser using JavaScript. No data is sent to
+            any server, and nothing is stored. Your privacy is fully protected.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container footer-wrap">
+        <div class="footer-left">&copy; 2026 Calculator Tools. All rights reserved.</div>
+        <div class="footer-nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-social"><span>f</span><span>x</span><span>◎</span><span>in</span></div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const d1Input = document.getElementById("d1");
+    const d2Input = document.getElementById("d2");
+    const errorEl = document.getElementById("error");
+    const resultEl = document.getElementById("result");
+    const layoutWrapper = document.getElementById("layoutWrapper");
+    const sidebarLeft = document.getElementById("sidebarLeft");
+    const sidebarRight = document.getElementById("sidebarRight");
+    const adBox = document.getElementById("adBox");
+    const suggestions = document.getElementById("suggestions");
+    const datePickerEl = document.getElementById("datePicker");
+    const pickerMonthEl = document.getElementById("pickerMonth");
+    const pickerMonthDropdownEl = document.getElementById("pickerMonthDropdown");
+    const pickerMonthOptionsEl = document.getElementById("pickerMonthOptions");
+    const pickerYearWrapEl = document.getElementById("pickerYearWrap");
+    const pickerYearEl = document.getElementById("pickerYear");
+    const pickerYearDropdownEl = document.getElementById("pickerYearDropdown");
+    const pickerYearOptionsEl = document.getElementById("pickerYearOptions");
+    const pickerTitleEl = document.getElementById("pickerTitle");
+    const pickerDaysEl = document.getElementById("pickerDays");
+    const pickerPrevBtn = document.getElementById("pickerPrev");
+    const pickerNextBtn = document.getElementById("pickerNext");
+    const dateButtons = document.querySelectorAll(".date-btn");
+
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    let activeInput = null;
+    let activeButton = null;
+    let viewYear = new Date().getFullYear();
+    let viewMonth = new Date().getMonth();
+
+    initPicker();
+
+    dateButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = btn.getAttribute("data-target");
+        const input = document.getElementById(targetId);
+        if (!datePickerEl.hidden && activeInput === input) {
+          closePicker();
+        } else {
+          openPicker(input, btn);
+        }
+      });
+    });
+
+    pickerMonthEl.addEventListener("click", () => {
+      if (pickerMonthDropdownEl.hidden) openMonthDropdown();
+      else closeMonthDropdown();
+    });
+
+    pickerYearEl.addEventListener("click", () => {
+      if (pickerYearDropdownEl.hidden) openYearDropdown();
+      else closeYearDropdown();
+    });
+
+    pickerPrevBtn.addEventListener("click", () => changeMonth(-1));
+    pickerNextBtn.addEventListener("click", () => changeMonth(1));
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!target.closest("#pickerMonthWrap")) closeMonthDropdown();
+      if (!target.closest("#pickerYearWrap")) closeYearDropdown();
+      if (!datePickerEl.contains(target) && !target.closest(".date-field")) {
+        closePicker();
+      }
+    });
+
+    function initPicker() {
+      monthNames.forEach((name, index) => {
+        const opt = document.createElement("button");
+        opt.type = "button";
+        opt.className = "picker-month-option";
+        opt.textContent = name;
+        opt.addEventListener("click", () => {
+          setViewMonth(index);
+          closeMonthDropdown();
+        });
+        pickerMonthOptionsEl.appendChild(opt);
+      });
+
+      for (let y = 1900; y <= 2100; y++) {
+        const opt = document.createElement("button");
+        opt.type = "button";
+        opt.className = "picker-year-option";
+        opt.textContent = String(y);
+        opt.dataset.year = String(y);
+        opt.addEventListener("click", () => {
+          setViewYear(y);
+          closeYearDropdown();
+        });
+        pickerYearOptionsEl.appendChild(opt);
+      }
+    }
+
+    function openPicker(inputEl, button) {
+      activeInput = inputEl;
+      if (activeButton) activeButton.classList.remove("active");
+      activeButton = button;
+      activeButton.classList.add("active");
+
+      const selected = parseDate(inputEl.value);
+      const base = selected || new Date();
+      viewYear = base.getFullYear();
+      viewMonth = base.getMonth();
+      
+      syncPickerState();
+      renderPickerDays();
+      positionPicker(inputEl);
+      datePickerEl.hidden = false;
+    }
+
+    function closePicker() {
+      datePickerEl.hidden = true;
+      if (activeButton) activeButton.classList.remove("active");
+      activeInput = null;
+      activeButton = null;
+    }
+
+    function changeMonth(offset) {
+      viewMonth += offset;
+      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      else if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      syncPickerState();
+      renderPickerDays();
+    }
+
+    function setViewMonth(m) { viewMonth = m; syncPickerState(); renderPickerDays(); }
+    function setViewYear(y) { viewYear = y; syncPickerState(); renderPickerDays(); }
+
+    function syncPickerState() {
+      pickerMonthEl.textContent = monthNames[viewMonth];
+      pickerYearEl.textContent = String(viewYear);
+      
+      const mOpts = pickerMonthOptionsEl.querySelectorAll(".picker-month-option");
+      mOpts.forEach((opt, i) => opt.classList.toggle("is-active", i === viewMonth));
+      
+      const yOpts = pickerYearOptionsEl.querySelectorAll(".picker-year-option");
+      yOpts.forEach(opt => opt.classList.toggle("is-active", Number(opt.dataset.year) === viewYear));
+    }
+
+    function openMonthDropdown() { closeYearDropdown(); pickerMonthDropdownEl.hidden = false; }
+    function closeMonthDropdown() { pickerMonthDropdownEl.hidden = true; }
+    function openYearDropdown() { 
+      closeMonthDropdown(); 
+      pickerYearDropdownEl.hidden = false; 
+      const active = pickerYearOptionsEl.querySelector(".picker-year-option.is-active");
+      if (active) active.scrollIntoView({ block: "center" });
+    }
+    function closeYearDropdown() { pickerYearDropdownEl.hidden = true; }
+
+    function renderPickerDays() {
+      const first = new Date(viewYear, viewMonth, 1).getDay();
+      const days = new Date(viewYear, viewMonth + 1, 0).getDate();
+      const prevDays = new Date(viewYear, viewMonth, 0).getDate();
+      const selected = activeInput ? parseDate(activeInput.value) : null;
+      const today = new Date();
+      today.setHours(0,0,0,0);
+
+      pickerTitleEl.textContent = monthNames[viewMonth] + " " + viewYear;
+      pickerDaysEl.innerHTML = "";
+
+      for (let i = 0; i < first; i++) {
+        const b = document.createElement("button");
+        b.className = "picker-day muted";
+        b.textContent = String(prevDays - first + i + 1);
+        b.disabled = true;
+        pickerDaysEl.appendChild(b);
+      }
+
+      for (let d = 1; d <= days; d++) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "picker-day";
+        b.textContent = String(d);
+        const current = new Date(viewYear, viewMonth, d);
+        if (selected && current.getTime() === selected.getTime()) b.classList.add("selected");
+        if (current.getTime() === today.getTime()) b.classList.add("today");
+
+        b.addEventListener("click", () => {
+          const input = activeInput;
+          input.value = toInputDate(current);
+          closePicker();
+          input.dispatchEvent(new Event("change"));
+          calcDiff(); // Explicitly trigger calculation
+        });
+        pickerDaysEl.appendChild(b);
+      }
+    }
+
+    function positionPicker(inputEl) {
+      const cardRect = inputEl.closest(".card").getBoundingClientRect();
+      const inputRect = inputEl.getBoundingClientRect();
+      datePickerEl.style.top = (inputRect.bottom - cardRect.top + 10) + "px";
+      datePickerEl.style.left = (inputRect.left - cardRect.left) + "px";
+    }
+
+    function parseDate(v) {
+      if (!v) return null;
+      const clean = v.trim();
+      // Try YYYY-MM-DD
+      if (/^\d{4}-\d{2}-\d{2}$/.test(clean)) {
+        const [y, m, d] = clean.split("-").map(Number);
+        const date = new Date(y, m - 1, d);
+        return isNaN(date.getTime()) ? null : date;
+      }
+      // Try DD-MM-YYYY
+      if (/^\d{2}-\d{2}-\d{4}$/.test(clean)) {
+        const [d, m, y] = clean.split("-").map(Number);
+        const date = new Date(y, m - 1, d);
+        return isNaN(date.getTime()) ? null : date;
+      }
+      // Fallback
+      const d = new Date(clean);
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function toInputDate(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return y + "-" + m + "-" + day;
+    }
+
+    function formatDate(d) {
+      return MONTHS_SHORT[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+
+    function calcDiff() {
+      const v1 = d1Input.value.trim();
+      const v2 = d2Input.value.trim();
+      
+      if (!v1 || !v2) {
+        if (resultEl) resultEl.style.display = 'none';
+        revertLayout();
+        return;
+      }
+
+      const date1 = parseDate(v1);
+      const date2 = parseDate(v2);
+      
+      if (!date1 || !date2) {
+        if (resultEl) resultEl.style.display = 'none';
+        revertLayout();
+        return;
+      }
+
+      const [start, end] = date1 <= date2 ? [date1, date2] : [date2, date1];
+      const diffMs = end - start;
+      const totalDays = Math.round(diffMs / 86400000);
+      const totalWeeks = Math.floor(totalDays / 7);
+      const totalHours = totalDays * 24;
+      const totalMinutes = totalHours * 60;
+      const totalSeconds = totalMinutes * 60;
+
+      let y = end.getFullYear() - start.getFullYear();
+      let m = end.getMonth() - start.getMonth();
+      let d = end.getDate() - start.getDate();
+      if (d < 0) {
+        m--;
+        const prevMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+        d += prevMonth.getDate();
+      }
+      if (m < 0) { y--; m += 12; }
+
+      // Update UI
+      const safeSet = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
+
+      safeSet('totalDaysOut', totalDays.toLocaleString());
+      safeSet('yearsOut', y + ' yr' + (y !== 1 ? 's' : ''));
+      safeSet('monthsOut', m + ' mo' + (m !== 1 ? 's' : ''));
+      safeSet('weeksOut', totalWeeks.toLocaleString() + ' wks');
+      safeSet('daysOut', totalDays.toLocaleString() + ' days');
+      safeSet('startOut', formatDate(start));
+      safeSet('endOut', formatDate(end));
+      safeSet('startDayOut', DAYS[start.getDay()]);
+      safeSet('endDayOut', DAYS[end.getDay()]);
+      safeSet('hoursOut', totalHours.toLocaleString());
+      safeSet('minutesOut', totalMinutes.toLocaleString());
+      safeSet('secondsOut', totalSeconds.toLocaleString());
+
+      const wasHidden = resultEl.style.display !== 'block';
+      resultEl.style.display = 'block';
+      updateLayoutForResult();
+
+      if (wasHidden && layoutWrapper) {
+        layoutWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Default End Date to Today
+    const todayStr = toInputDate(new Date());
+    d2Input.value = todayStr;
+
+    [d1Input, d2Input].forEach(el => {
+      el.addEventListener('input', calcDiff);
+      el.addEventListener('change', calcDiff);
+    });
+
+    // Initial calculation if dates are present
+    calcDiff();
+
+    function updateLayoutForResult() {
+      if (window.innerWidth >= 1024) {
+        sidebarLeft.appendChild(adBox);
+        suggestions.style.display = "block";
+        adBox.classList.add("vertical-ad");
+        const adGraphic = document.getElementById("adGraphic");
+        adGraphic.style.maxWidth = "160px";
+        adGraphic.style.height = "600px";
+        adGraphic.innerHTML = "<strong>Vertical Sidebar Ad</strong>";
+      } else {
+        suggestions.style.display = "block";
+      }
+    }
+
+    function revertLayout() {
+      document.getElementById("centerColumn").appendChild(adBox);
+      suggestions.style.display = "none";
+      adBox.classList.remove("vertical-ad");
+      const adGraphic = document.getElementById("adGraphic");
+      adGraphic.style.maxWidth = "728px";
+      adGraphic.style.height = "90px";
+      adGraphic.innerHTML = "<strong>Responsive Banner Ad (728x90)</strong>";
+      sidebarLeft.style.paddingTop = "0";
+      sidebarRight.style.paddingTop = "0";
+    }
+
+    window.addEventListener("resize", () => {
+      if (resultEl.style.display === "block") updateLayoutForResult();
+    });
+
+    const root = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+    const saved = localStorage.getItem("ageCalculatorTheme");
+    if (saved === "dark") toggle.textContent = "Light Mode";
+    toggle.addEventListener("click", () => {
+      const nextTheme = (root.getAttribute("data-theme") || "light") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", nextTheme);
+      localStorage.setItem("ageCalculatorTheme", nextTheme);
+      toggle.textContent = nextTheme === "dark" ? "Light Mode" : "Dark Mode";
+    });
+
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (_error) { }
+      }
+      const temp = document.createElement("textarea");
+      temp.value = text;
+      temp.style.position = "fixed";
+      temp.style.opacity = "0";
+      document.body.appendChild(temp);
+      temp.focus();
+      temp.select();
+      let ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (_error) { }
+      document.body.removeChild(temp);
+      return ok;
+    }
+
+    function flashButton(button, message) {
+      const original = button.textContent;
+      button.textContent = message;
+      button.disabled = true;
+      setTimeout(function () {
+        button.textContent = original;
+        button.disabled = false;
+      }, 1100);
+    }
+
+    const copyBtn = document.getElementById("copyBtn");
+    const shareBtn = document.getElementById("shareBtn");
+
+    copyBtn.addEventListener("click", async () => {
+      const days = document.getElementById('totalDaysOut').textContent;
+      const start = document.getElementById('startOut').textContent;
+      const end = document.getElementById('endOut').textContent;
+      if (days === "0") return;
+      const text = `The difference between ${start} and ${end} is ${days} days. Calculated using Date Difference Calculator!`;
+      const copied = await writeClipboard(text);
+      flashButton(copyBtn, copied ? "Copied!" : "Copy failed");
+    });
+
+    shareBtn.addEventListener("click", async () => {
+      const days = document.getElementById('totalDaysOut').textContent;
+      const start = document.getElementById('startOut').textContent;
+      const end = document.getElementById('endOut').textContent;
+      if (days === "0") return;
+      const text = `The difference between ${start} and ${end} is ${days} days. Calculated using Date Difference Calculator!`;
+      const shareUrl = window.location.href;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: "Date Difference Result", text: text, url: shareUrl });
+          flashButton(shareBtn, "Shared!");
+          return;
+        } catch (_error) { }
+      }
+      const tweetUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text + " " + shareUrl);
+      window.open(tweetUrl, "_blank", "noopener,noreferrer");
+      flashButton(shareBtn, "Opened share");
+    });
+  </script>
+</body>
+
+</html>

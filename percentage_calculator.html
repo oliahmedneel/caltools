@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Free online Percentage Calculator. Instantly calculate what percent of a value is, percentage change, and more.">
+  <title>Percentage Calculator - Calculate Percentages Instantly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem("ageCalculatorTheme");
+      document.documentElement.setAttribute("data-theme", savedTheme === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f3f5f8;
+      --card: #ffffff;
+      --text: #121826;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #ef8f5f;
+      --primary-hover: #e37f50;
+      --shadow: 0 18px 34px rgba(239, 143, 95, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1200px, 94%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #f0f2f5;
+      background: #fff;
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 56px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 600;
+      font-size: 18px;
+      color: #e1885c;
+    }
+
+    .brand-dot { width: 22px; height: 22px; border-radius: 4px; object-fit: contain; }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .menu a:hover {
+      color: #111827;
+    }
+
+    .menu-cta {
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--card);
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 56px 0 94px;
+      text-align: center;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 28px;
+      align-items: start;
+      scroll-margin-top: 80px;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-layout {
+        grid-template-columns: 1fr 820px 1fr;
+        justify-content: center;
+      }
+
+      .card {
+        width: 820px;
+        margin: 0 auto;
+      }
+    }
+
+    .ad-placeholder {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+      transition: margin-top 0.3s ease;
+    }
+
+    .ad-placeholder.vertical-ad {
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0;
+    }
+
+    .suggestions-card {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: left;
+      transition: margin-top 0.3s ease;
+      animation: bgPulse 1.5s infinite alternate ease-in-out;
+    }
+
+    .suggestions-card:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes bgPulse {
+      from { background-color: var(--card); }
+      to { background-color: #f26f3e; }
+    }
+
+    #sidebarLeft, #sidebarRight {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .suggestions-card h4 {
+      margin: 0 0 16px;
+      font-size: 14px;
+    }
+
+    .suggest-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .suggest-btn {
+      display: block;
+      padding: 10px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      max-width: 700px;
+      margin-inline: auto;
+    }
+
+    .subtitle {
+      margin: 14px auto 0;
+      max-width: 560px;
+      color: #6b7280;
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    .card {
+      margin: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 18px 16px 14px;
+      text-align: left;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 8px;
+      background: #f39a6a;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .card-title {
+      margin: 3px 0 10px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 7px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--bg-soft);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #374151;
+    }
+
+    .date-input {
+      width: 100%;
+      padding: 9px 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fff;
+      color: #4b5563;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .date-input:focus {
+      border-color: #f3aa83;
+      box-shadow: 0 0 0 2px #fee7d8;
+    }
+
+    .btn-calc {
+      width: 100%;
+      margin-top: 15px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-calc:hover {
+      background: var(--primary-hover);
+    }
+
+    .result-shell {
+      display: none;
+      margin-top: 16px;
+      border: 1px solid #ebedf2;
+      border-radius: 16px;
+      background: #f6f1ee;
+      padding: 14px;
+    }
+
+    .result-hero {
+      border: 1px solid #e7e9ee;
+      border-radius: 14px;
+      background: #fffdfc;
+      text-align: center;
+      padding: 18px 12px 16px;
+    }
+
+    .result-kicker {
+      margin: 0;
+      color: #e0895f;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+
+    .result-main {
+      margin-top: 10px;
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .result-main span {
+      font-size: 58px;
+      color: #f26f3e;
+      font-weight: 700;
+    }
+
+    .result-actions {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .ghost-btn {
+      border: 1px solid #dce1ea;
+      background: #f9fafb;
+      color: #1f2937;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    html[data-theme="dark"] .ghost-btn {
+      background: var(--card);
+      border-color: var(--line);
+      color: var(--text);
+    }
+    html[data-theme="dark"] .ghost-btn:hover {
+      background: #1d2840;
+    }
+    .privacy {
+      color: #f26f3e;
+      font-size: 10px;
+      margin-top: 8px;
+    }
+
+    section.content {
+      margin-top: 0;
+      background: #f4f6f8;
+      padding: 82px 0 70px;
+      scroll-margin-top: 88px;
+    }
+
+    h2 {
+      margin: 0 0 11px;
+      font-size: clamp(2rem, 3vw, 2.45rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .text-wrap {
+      width: min(820px, 92%);
+      margin: 0 auto;
+    }
+
+    .about-title {
+      text-align: left;
+      font-size: clamp(2rem, 2.8vw, 2.4rem);
+      margin-bottom: 20px;
+    }
+
+    .text-block {
+      color: #2f3645;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin-bottom: 16px;
+      font-size: 13px;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    details {
+      border: 0;
+      border-bottom: 1px solid #e5e7eb;
+      background: transparent;
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #111827;
+      font-size: 15px;
+      list-style: none;
+      padding: 18px 0;
+      position: relative;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    details p {
+      margin: -4px 0 14px;
+      color: #4b5563;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    footer {
+      margin: 0;
+      border-top: 1px solid #e5e7eb;
+      background: #f4f6f8;
+      padding: 18px 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-wrap {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-left {
+      justify-self: start;
+      color: #6b7280;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #6b7280;
+    }
+
+    .footer-social {
+      justify-self: end;
+      display: flex;
+      gap: 10px;
+      color: #9ca3af;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .menu a:not(:first-child):not(:last-child) {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 34px;
+        padding-bottom: 64px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section.content {
+        padding: 64px 0 52px;
+      }
+
+      .footer-wrap {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-left,
+      .footer-social {
+        justify-self: center;
+      }
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card: #111827;
+      --text: #e5edf7;
+      --muted: #94a3b8;
+      --line: #243041;
+      --primary: #f29a6b;
+      --shadow: 0 18px 34px rgba(2, 6, 23, 0.45);
+    }
+
+    html[data-theme="dark"] .topbar,
+    html[data-theme="dark"] footer {
+      background: #0b1220;
+    }
+
+    html[data-theme="dark"] section.content,
+    html[data-theme="dark"] .result-shell {
+      background: #111827;
+    }
+
+    html[data-theme="dark"] .card,
+    html[data-theme="dark"] .result-hero,
+    html[data-theme="dark"] .menu-cta,
+    html[data-theme="dark"] .date-input,
+    html[data-theme="dark"] .tab-btn {
+      background: var(--card);
+      border-color: var(--line);
+    }
+
+    html[data-theme="dark"] .brand,
+    html[data-theme="dark"] .menu-cta,
+    html[data-theme="dark"] .date-input,
+    html[data-theme="dark"] h1,
+    html[data-theme="dark"] h2,
+    html[data-theme="dark"] h3,
+    html[data-theme="dark"] h4,
+    html[data-theme="dark"] .result-main,
+    html[data-theme="dark"] .footer-left,
+    html[data-theme="dark"] .footer-nav {
+      color: var(--text);
+    }
+
+    html[data-theme="dark"] .subtitle,
+    html[data-theme="dark"] label,
+    html[data-theme="dark"] .text-block,
+    html[data-theme="dark"] summary,
+    html[data-theme="dark"] details p,
+    html[data-theme="dark"] .footer-wrap,
+    html[data-theme="dark"] .footer-social,
+    html[data-theme="dark"] .tab-btn {
+      color: var(--muted);
+    }
+
+    html[data-theme="dark"] .result-kicker,
+    html[data-theme="dark"] .result-main span {
+      color: var(--primary);
+    }
+
+    html[data-theme="dark"] .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><img src="logo.png" class="brand-dot" alt="Calculator Tools Logo"><span>Percentage Calculator</span></a>
+      <nav class="menu">
+        <a href="index.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+        <button class="menu-cta" id="themeToggle" type="button" aria-label="Toggle dark mode">Dark Mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <h1>Percentage Calculator</h1>
+        <p class="subtitle">Instantly calculate percentages, percentage changes, and find what percent one number is of another — free, fast, and accurate.</p>
+
+        <div class="hero-layout" id="layoutWrapper">
+          <div id="sidebarLeft"></div>
+
+          <div id="centerColumn">
+            <div class="card" id="calculator">
+              <h3 class="card-title">Calculate Percentage</h3>
+              <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('basic', this)">What is X% of Y?</button>
+                <button class="tab-btn" onclick="switchTab('ofWhat', this)">X is what % of Y?</button>
+                <button class="tab-btn" onclick="switchTab('change', this)">% Change</button>
+              </div>
+
+              <!-- Tab 1: What is X% of Y -->
+              <div class="tab-panel active" id="tab-basic">
+                <div class="form-grid">
+                  <div>
+                    <label for="perc1">Percentage (%)</label>
+                    <input type="number" id="perc1" class="date-input" placeholder="e.g. 20">
+                  </div>
+                  <div>
+                    <label for="val1">Of Value</label>
+                    <input type="number" id="val1" class="date-input" placeholder="e.g. 500">
+                  </div>
+                </div>
+                <div class="result-shell" id="res1">
+                  <div class="result-hero">
+                    <p class="result-kicker">Result</p>
+                    <div class="result-main"><span id="out1">0</span></div>
+                    <div class="result-actions">
+                      <button class="ghost-btn" id="copyBtn1" type="button">Copy Result</button>
+                      <button class="ghost-btn" id="shareBtn1" type="button">Share</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 2: X is what % of Y -->
+              <div class="tab-panel" id="tab-ofWhat">
+                <div class="form-grid">
+                  <div>
+                    <label for="part2">Value (X)</label>
+                    <input type="number" id="part2" class="date-input" placeholder="e.g. 80">
+                  </div>
+                  <div>
+                    <label for="whole2">Total (Y)</label>
+                    <input type="number" id="whole2" class="date-input" placeholder="e.g. 400">
+                  </div>
+                </div>
+                <div class="result-shell" id="res2">
+                  <div class="result-hero">
+                    <p class="result-kicker">Result</p>
+                    <div class="result-main"><span id="out2">0</span>%</div>
+                    <div class="result-actions">
+                      <button class="ghost-btn" id="copyBtn2" type="button">Copy Result</button>
+                      <button class="ghost-btn" id="shareBtn2" type="button">Share</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab 3: Percentage Change -->
+              <div class="tab-panel" id="tab-change">
+                <div class="form-grid">
+                  <div>
+                    <label for="from3">From Value</label>
+                    <input type="number" id="from3" class="date-input" placeholder="e.g. 200">
+                  </div>
+                  <div>
+                    <label for="to3">To Value</label>
+                    <input type="number" id="to3" class="date-input" placeholder="e.g. 250">
+                  </div>
+                </div>
+                <div class="result-shell" id="res3">
+                  <div class="result-hero">
+                    <p class="result-kicker">Percentage Change</p>
+                    <div class="result-main"><span id="out3">0</span>%</div>
+                    <div class="result-actions">
+                      <button class="ghost-btn" id="copyBtn3" type="button">Copy Result</button>
+                      <button class="ghost-btn" id="shareBtn3" type="button">Share</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="privacy">Privacy note: all calculations happen in your browser. Nothing is sent to a server.</p>
+            </div>
+
+            <div class="ad-placeholder" id="adBox">
+              <div style="border: 1px dashed #cbd5e1; padding: 10px; border-radius: 8px; background: #fafafa;">
+                <p style="color: var(--muted); font-size: 12px; margin: 0 0 8px;">ADVERTISEMENT</p>
+                <div id="adGraphic" style="margin: 0 auto; width: 100%; max-width: 728px; height: 90px; background: #eaedf2; display: flex; align-items: center; justify-content: center; color: #64748b; border: 1px solid #e2e8f0;">
+                  <strong>Responsive Banner Ad (728x90)</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="sidebarRight">
+            <div class="suggestions-card" id="suggestions">
+              <h4>Other Calculators</h4>
+              <div class="suggest-list">
+                <a href="age_calculator.html" class="suggest-btn">Age Calculator</a>
+                <a href="bmi_calculator.html" class="suggest-btn">BMI Calculator</a>
+                <a href="bmr_calculator.html" class="suggest-btn">BMR Calculator</a>
+                <a href="loan_emi_calculator.html" class="suggest-btn">Loan EMI Calculator</a>
+                <a href="date_difference.html" class="suggest-btn">Date Difference</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content" id="about">
+      <div class="text-wrap">
+        <h2 class="about-title">What is a Percentage Calculator?</h2>
+        <div class="text-block">
+          A percentage calculator is a mathematical tool that simplifies the process of working with percentages.
+          Percentages are a way of expressing a number as a fraction of 100, making it easier to compare proportions and
+          ratios. The word "percent" comes from the Latin "per centum," meaning "by the hundred."
+        </div>
+        <div class="text-block">
+          The most common use of a percentage calculator is to find what a given percentage of a number is. For example,
+          finding 20% of 500 gives you 100. This is essential for calculating discounts, tax amounts, tips, and interest
+          payments in everyday financial transactions.
+        </div>
+        <div class="text-block">
+          Another frequent use is determining what percentage one number is of another. For instance, if you scored 45
+          out of 60 on a test, you might want to know this as a percentage. The formula is: (part ÷ whole) × 100. In
+          this case, (45 ÷ 60) × 100 = 75%.
+        </div>
+        <div class="text-block">
+          Percentage change is particularly useful in business, economics, and data analysis. It measures how much a
+          value has increased or decreased relative to its original value. The formula is: ((New Value − Old Value) ÷
+          Old Value) × 100. Positive results indicate an increase; negative results indicate a decrease.
+        </div>
+        <div class="text-block">
+          Percentages are used across virtually every field. In healthcare, they express survival rates and medication
+          effectiveness. In finance, they are used for interest rates, profit margins, and investment returns. In
+          education, they are used to express grades and pass rates. In science, they represent concentration levels and
+          statistical probabilities.
+        </div>
+        <div class="text-block">
+          Understanding percentages is a fundamental life skill. Whether you're comparing prices at a supermarket,
+          analyzing business performance, or calculating your exam grade, a percentage calculator provides quick,
+          error-free results so you can focus on making informed decisions.
+        </div>
+      </div>
+    </section>
+
+    <section class="content" id="faq">
+      <div class="text-wrap">
+        <h2>Frequently Asked Questions</h2>
+        <details>
+          <summary>How do I find what percentage one number is of another?</summary>
+          <p>Use the formula: (Part ÷ Whole) × 100. For example, to find what percentage 30 is of 120: (30 ÷ 120) × 100
+            = 25%. This calculator's second tab handles this automatically.</p>
+        </details>
+        <details>
+          <summary>What is percentage change and how is it calculated?</summary>
+          <p>Percentage change shows how much a value has changed relative to its original value. Formula: ((New − Old)
+            ÷ Old) × 100. A positive result means an increase; a negative result means a decrease.</p>
+        </details>
+        <details>
+          <summary>How do I calculate a discount?</summary>
+          <p>To calculate a discount, use the "What is X% of Y?" tab. Enter the discount percentage and the original
+            price. The result is the discount amount. Subtract it from the original price to get the final price.</p>
+        </details>
+        <details>
+          <summary>Can I calculate VAT or tax using this tool?</summary>
+          <p>Yes. Enter the tax rate as the percentage and the pre-tax amount as the value. The result is the tax
+            amount. Add it to the original price to get the total including tax.</p>
+        </details>
+        <details>
+          <summary>What if I get a negative percentage change?</summary>
+          <p>A negative percentage change means the value decreased. For example, if a price went from 200 to 150, the
+            percentage change is −25%, indicating a 25% decrease.</p>
+        </details>
+        <details>
+          <summary>Is my data stored or shared?</summary>
+          <p>No. All calculations are performed locally in your browser. No personal data or inputs are sent to any
+            server or stored anywhere.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container footer-wrap">
+        <div class="footer-left">&copy; 2026 Calculator Tools. All rights reserved.</div>
+        <div class="footer-nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-social"><span>f</span><span>x</span><span>◎</span><span>in</span></div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+      revertLayout();
+    }
+
+    const layoutWrapper = document.getElementById("layoutWrapper");
+    const sidebarLeft = document.getElementById("sidebarLeft");
+    const sidebarRight = document.getElementById("sidebarRight");
+    const adBox = document.getElementById("adBox");
+    const suggestions = document.getElementById("suggestions");
+
+    function calcBasic() {
+      const p = parseFloat(document.getElementById('perc1').value);
+      const v = parseFloat(document.getElementById('val1').value);
+      if (!isNaN(p) && !isNaN(v)) {
+        document.getElementById('out1').textContent = ((p / 100) * v).toLocaleString();
+        const resDiv = document.getElementById('res1');
+        const wasHidden = resDiv.style.display !== 'block';
+        resDiv.style.display = 'block';
+        updateLayoutForResult('res1');
+        if (wasHidden) {
+          document.getElementById('layoutWrapper').scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else {
+        document.getElementById('res1').style.display = 'none';
+        revertLayout();
+      }
+    }
+
+    function calcOfWhat() {
+      const part = parseFloat(document.getElementById('part2').value);
+      const whole = parseFloat(document.getElementById('whole2').value);
+      if (!isNaN(part) && !isNaN(whole) && whole !== 0) {
+        document.getElementById('out2').textContent = ((part / whole) * 100).toFixed(2);
+        const resDiv = document.getElementById('res2');
+        const wasHidden = resDiv.style.display !== 'block';
+        resDiv.style.display = 'block';
+        updateLayoutForResult('res2');
+        if (wasHidden) {
+          document.getElementById('layoutWrapper').scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else {
+        document.getElementById('res2').style.display = 'none';
+        revertLayout();
+      }
+    }
+
+    function calcChange() {
+      const from = parseFloat(document.getElementById('from3').value);
+      const to = parseFloat(document.getElementById('to3').value);
+      if (!isNaN(from) && !isNaN(to) && from !== 0) {
+        const change = ((to - from) / Math.abs(from)) * 100;
+        document.getElementById('out3').textContent = change.toFixed(2);
+        const resDiv = document.getElementById('res3');
+        const wasHidden = resDiv.style.display !== 'block';
+        resDiv.style.display = 'block';
+        updateLayoutForResult('res3');
+        if (wasHidden) {
+          document.getElementById('layoutWrapper').scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else {
+        document.getElementById('res3').style.display = 'none';
+        revertLayout();
+      }
+    }
+
+    ['perc1', 'val1'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calcBasic);
+    });
+    ['part2', 'whole2'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calcOfWhat);
+    });
+    ['from3', 'to3'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calcChange);
+    });
+
+    function updateLayoutForResult(activeResultId) {
+      if (window.innerWidth >= 1024) {
+        sidebarLeft.appendChild(adBox);
+        suggestions.style.display = "block";
+        adBox.classList.add("vertical-ad");
+        const adGraphic = document.getElementById("adGraphic");
+        adGraphic.style.maxWidth = "160px";
+        adGraphic.style.height = "600px";
+        adGraphic.innerHTML = "<strong>Vertical Sidebar Ad</strong>";
+      } else {
+        suggestions.style.display = "block";
+      }
+    }
+
+    function revertLayout() {
+      document.getElementById("centerColumn").appendChild(adBox);
+      suggestions.style.display = "none";
+      adBox.classList.remove("vertical-ad");
+      const adGraphic = document.getElementById("adGraphic");
+      adGraphic.style.maxWidth = "728px";
+      adGraphic.style.height = "90px";
+      adGraphic.innerHTML = "<strong>Responsive Banner Ad (728x90)</strong>";
+      sidebarLeft.style.paddingTop = "0";
+      sidebarRight.style.paddingTop = "0";
+    }
+
+    window.addEventListener("resize", () => {
+      const activePanel = document.querySelector('.tab-panel.active');
+      const activeResult = activePanel.querySelector('.result-shell');
+      if (activeResult && activeResult.style.display === "block") {
+        updateLayoutForResult(activeResult.id);
+      }
+    });
+
+    const root = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+    const saved = localStorage.getItem("ageCalculatorTheme");
+    if (saved === "dark") toggle.textContent = "Light Mode";
+    toggle.addEventListener("click", () => {
+      const nextTheme = (root.getAttribute("data-theme") || "light") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", nextTheme);
+      localStorage.setItem("ageCalculatorTheme", nextTheme);
+      toggle.textContent = nextTheme === "dark" ? "Light Mode" : "Dark Mode";
+    });
+
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (_error) { }
+      }
+      const temp = document.createElement("textarea");
+      temp.value = text;
+      temp.style.position = "fixed";
+      temp.style.opacity = "0";
+      document.body.appendChild(temp);
+      temp.focus();
+      temp.select();
+      let ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (_error) { }
+      document.body.removeChild(temp);
+      return ok;
+    }
+
+    function flashButton(button, message) {
+      const original = button.textContent;
+      button.textContent = message;
+      button.disabled = true;
+      setTimeout(function () {
+        button.textContent = original;
+        button.disabled = false;
+      }, 1100);
+    }
+
+    function setupAction(copyId, shareId, getMsg) {
+      const copyBtn = document.getElementById(copyId);
+      const shareBtn = document.getElementById(shareId);
+      
+      copyBtn.addEventListener("click", async () => {
+        const text = getMsg();
+        const copied = await writeClipboard(text);
+        flashButton(copyBtn, copied ? "Copied!" : "Copy failed");
+      });
+
+      shareBtn.addEventListener("click", async () => {
+        const text = getMsg();
+        const shareUrl = window.location.href;
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: "Percentage Result", text: text, url: shareUrl });
+            flashButton(shareBtn, "Shared!");
+            return;
+          } catch (_error) { }
+        }
+        const tweetUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text + " " + shareUrl);
+        window.open(tweetUrl, "_blank", "noopener,noreferrer");
+        flashButton(shareBtn, "Opened share");
+      });
+    }
+
+    setupAction("copyBtn1", "shareBtn1", () => {
+      const p = document.getElementById('perc1').value;
+      const v = document.getElementById('val1').value;
+      const res = document.getElementById('out1').textContent;
+      return `${p}% of ${v} is ${res}. Calculated using Percentage Calculator!`;
+    });
+
+    setupAction("copyBtn2", "shareBtn2", () => {
+      const p = document.getElementById('part2').value;
+      const w = document.getElementById('whole2').value;
+      const res = document.getElementById('out2').textContent;
+      return `${p} is ${res}% of ${w}. Calculated using Percentage Calculator!`;
+    });
+
+    setupAction("copyBtn3", "shareBtn3", () => {
+      const f = document.getElementById('from3').value;
+      const t = document.getElementById('to3').value;
+      const res = document.getElementById('out3').textContent;
+      const type = parseFloat(res) >= 0 ? "increase" : "decrease";
+      return `Changing from ${f} to ${t} is a ${res}% ${type}. Calculated using Percentage Calculator!`;
+    });
+  </script>
+</body>
+
+</html>
