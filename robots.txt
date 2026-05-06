@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+# এআই বট ব্লক করার জন্য স্ট্যান্ডার্ড পদ্ধতি
+User-agent: GPTBot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: CCBot
+Disallow: /
+
 Sitemap: https://caltool.xyz/sitemap.xml
