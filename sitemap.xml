@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yourdomain.com/index.html</loc>
+    <loc>https://caltool.xyz/index.html</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/age_calculator.html</loc>
+    <loc>https://caltool.xyz/age_calculator.html</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/bmi_calculator.html</loc>
+    <loc>https://caltool.xyz/bmi_calculator.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/bmr_calculator.html</loc>
+    <loc>https://caltool.xyz/bmr_calculator.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/loan_emi_calculator.html</loc>
+    <loc>https://caltool.xyz/loan_emi_calculator.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/percentage_calculator.html</loc>
+    <loc>https://caltool.xyz/percentage_calculator.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/date_difference.html</loc>
+    <loc>https://caltool.xyz/date_difference.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/about.html</loc>
+    <loc>https://caltool.xyz/about.html</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/contact.html</loc>
+    <loc>https://caltool.xyz/contact.html</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/privacy.html</loc>
+    <loc>https://caltool.xyz/privacy.html</loc>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/terms.html</loc>
+    <loc>https://caltool.xyz/terms.html</loc>
     <priority>0.3</priority>
   </url>
 </urlset>
