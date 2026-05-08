@@ -11,61 +11,73 @@
   <loc>https://caltool.xyz/</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>1.00</priority>
+  <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/index.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/about.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/privacy.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/terms.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/contact.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/age_calculator.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/bmi_calculator.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/bmr_calculator.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/percentage_calculator.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/loan_emi_calculator.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://caltool.xyz/date_difference.html</loc>
   <lastmod>2026-05-07T16:42:38+00:00</lastmod>
   <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
 </url>
 
 
