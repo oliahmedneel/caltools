@@ -2125,6 +2125,26 @@
     })();
 
     setupFaqAccordion(); // Initialize FAQ accordion behavior
+
+    function shareWhatsApp() {
+    const text = "I just calculated my results on CalTool! Check it out: ";
+    const url = window.location.href;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + url)}`, '_blank');
+}
+
+function shareFacebook() {
+    const url = window.location.href;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+}
+
+function copyLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        alert("Link copied to clipboard!");
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
   </script>
 </body>
 
