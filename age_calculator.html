@@ -16,12 +16,19 @@
  <meta property="og:url" content="https://caltool.xyz/age_calculator.html">
  <meta property="og:title" content="Age Calculator - Exact Age in Years, Months, and Days">
  <meta property="og:description" content="Find out exactly how old you are with our easy-to-use Age Calculator. Fast and accurate results.">
- <meta property="og:image" content="https://caltool.xyz/logo.webp"> <meta property="og:site_name" content="CalTool">
+ <meta property="og:image" content="https://caltool.xyz/age-calculator-og.png">
+ <meta property="og:image:secure_url" content="https://caltool.xyz/age-calculator-og.png">
+ <meta property="og:image:type" content="image/png">
+ <meta property="og:image:width" content="1200">
+ <meta property="og:image:height" content="630">
+ <meta property="og:image:alt" content="Age Calculator preview showing exact age in years, months, and days">
+ <meta property="og:site_name" content="CalTool">
 
  <meta name="twitter:card" content="summary_large_image">
  <meta name="twitter:title" content="Age Calculator - Exact Age Online">
  <meta name="twitter:description" content="Calculate your exact age in years, months, and days instantly.">
- <meta name="twitter:image" content="https://caltool.xyz/logo.webp">
+ <meta name="twitter:image" content="https://caltool.xyz/age-calculator-og.png">
+ <meta name="twitter:image:alt" content="Age Calculator preview showing exact age in years, months, and days">
 
  <link rel="canonical" href="https://caltool.xyz/age_calculator.html">
   
@@ -45,6 +52,7 @@
     "@type": "SoftwareApplication",
     "name": "Age Calculator",
     "description": "A free online tool to calculate your exact age in years, months, days, weeks, and hours accurately.",
+    "image": "https://caltool.xyz/age-calculator-og.png",
     "operatingSystem": "All",
     "applicationCategory": "EducationalApplication",
     "url": "https://caltool.xyz/age_calculator.html",
@@ -627,6 +635,58 @@
       font-weight: 600;
     }
 
+    .share-chip {
+      min-height: 36px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 8px 12px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .share-chip:hover {
+      background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+      transform: translateY(-2px);
+    }
+
+    .share-chip:active {
+      transform: scale(0.95);
+    }
+
+    .share-mark {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      display: inline-grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .share-mark svg {
+      width: 13px;
+      height: 13px;
+      display: block;
+      fill: currentColor;
+      stroke: currentColor;
+      stroke-width: 0;
+    }
+
     .result-shell {
       display: none;
       margin-top: 16px;
@@ -683,8 +743,47 @@
     .result-actions {
       margin-top: 14px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
+      position: relative;
+    }
+
+    .share-menu {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .share-menu-panel {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      z-index: 60;
+      width: min(420px, calc(100vw - 32px));
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid #eaded8;
+      border-radius: 14px;
+      background: #fffdfc;
+      box-shadow: 0 18px 34px rgba(15, 23, 42, 0.16);
+      transform: translateX(-50%) translateY(-4px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    }
+
+    .share-menu-panel[hidden] {
+      display: none;
+    }
+
+    .share-menu.is-open .share-menu-panel {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
     }
 
     .ghost-btn {
@@ -955,6 +1054,34 @@
         width: min(264px, calc(100vw - 24px));
       }
 
+      .result-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .share-menu {
+        width: 100%;
+      }
+
+      .share-menu-panel {
+        left: auto;
+        right: 0;
+        width: min(330px, calc(100vw - 28px));
+        grid-template-columns: 1fr;
+        transform: translateY(-4px);
+      }
+
+      .share-menu.is-open .share-menu-panel {
+        transform: translateY(0);
+      }
+
+      .result-actions .ghost-btn,
+      .share-chip {
+        width: 100%;
+        padding: 9px 8px;
+        font-size: 11px;
+      }
+
       .result-main-age {
         font-size: 46px;
       }
@@ -1002,6 +1129,18 @@
       }
     }
 
+    @media (max-width: 420px) {
+      .share-mark {
+        min-width: 22px;
+        height: 22px;
+      }
+
+      .share-mark svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
     html[data-theme="dark"] {
       color-scheme: dark;
       --bg: #0f172a;
@@ -1031,6 +1170,7 @@
     html[data-theme="dark"] .date-btn,
     html[data-theme="dark"] .picker-select,
     html[data-theme="dark"] .picker-year-dropdown,
+    html[data-theme="dark"] .share-menu-panel,
     html[data-theme="dark"] .ghost-btn {
       background: var(--card);
       border-color: var(--line);
@@ -1103,6 +1243,21 @@
     html[data-theme="dark"] .kv .v.accent,
     html[data-theme="dark"] .heartbeat .insight-value {
       color: var(--primary);
+    }
+
+    html[data-theme="dark"] .share-mark {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    html[data-theme="dark"] .share-chip {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      border-color: transparent;
+      color: #fff;
+    }
+
+    html[data-theme="dark"] .share-chip:hover {
+      background: linear-gradient(135deg, var(--primary-hover), var(--primary));
     }
 
     html[data-theme="dark"] .insight-grid {
@@ -1235,9 +1390,62 @@
                 <div class="result-main-age"><span id="years">0</span> years</div>
                 <div class="result-sub-age"><span id="months">0</span> <span class="muted">months</span> <span
                     id="days">0</span> <span class="muted">days</span></div>
-                <div class="result-actions">
+                <div class="result-actions" aria-label="Copy or share this age result">
                   <button class="ghost-btn" id="copyBtn" type="button">Copy Result</button>
-                  <button class="ghost-btn" id="shareBtn" type="button">Share</button>
+                  <div class="share-menu" id="shareMenu">
+                    <button class="ghost-btn" id="shareBtn" type="button" aria-haspopup="true" aria-expanded="false"
+                      aria-controls="shareMenuPanel">Share</button>
+                    <div class="share-menu-panel" id="shareMenuPanel" hidden>
+                      <a class="share-chip" data-share-link data-share-platform="facebook" href="#" target="_blank"
+                        rel="noopener noreferrer" aria-label="Share result on Facebook" title="Facebook">
+                        <span class="share-mark" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M14.35 8.13h2.16V5h-2.65c-3.03 0-4.58 1.81-4.58 4.47v1.78H6.9v3.5h2.38V22h3.56v-7.25h2.97l.47-3.5h-3.44V9.82c0-1.01.27-1.69 1.51-1.69z" />
+                          </svg>
+                        </span><span class="share-name">Facebook</span>
+                      </a>
+                      <a class="share-chip" data-share-link data-share-platform="x" href="#" target="_blank"
+                        rel="noopener noreferrer" aria-label="Share result on X" title="X">
+                        <span class="share-mark" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M14.6 10.9 20.3 4h-2.7l-4.2 5.1L9.8 4H4l6.2 8.8L4.3 20h2.7l4.5-5.4 3.8 5.4H21l-6.4-9.1zm-2.1 2.5-1.1-1.6-4.2-5.9h1.4l3.5 5 1.1 1.6 4.5 6.4h-1.4l-3.8-5.5z" />
+                          </svg>
+                        </span><span class="share-name">X</span>
+                      </a>
+                      <a class="share-chip" data-share-link data-share-platform="whatsapp" href="#" target="_blank"
+                        rel="noopener noreferrer" aria-label="Share result on WhatsApp" title="WhatsApp">
+                        <span class="share-mark" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M12.04 3.25a8.7 8.7 0 0 0-7.4 13.27L3.6 20.75l4.34-1.02a8.69 8.69 0 1 0 4.1-16.48zm0 1.73a6.96 6.96 0 0 1 5.91 10.65 6.92 6.92 0 0 1-8.94 2.45l-.33-.18-2.55.6.61-2.48-.22-.35a6.96 6.96 0 0 1 5.52-10.69zm-2.46 3.65c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.09s.9 2.42 1.02 2.59c.13.17 1.75 2.8 4.31 3.82 2.13.85 2.56.68 3.02.64.46-.04 1.48-.61 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.17-.48-.3-.25-.12-1.48-.73-1.71-.82-.23-.08-.4-.12-.57.13-.17.25-.65.82-.8.99-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.36-.78-1.86-.2-.48-.41-.49-.56-.5h-.58z" />
+                          </svg>
+                        </span><span class="share-name">WhatsApp</span>
+                      </a>
+                      <a class="share-chip" data-share-link data-share-platform="telegram" href="#" target="_blank"
+                        rel="noopener noreferrer" aria-label="Share result on Telegram" title="Telegram">
+                        <span class="share-mark" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M20.7 4.36c.31-.13.66.11.6.47l-2.46 14.61c-.05.31-.39.49-.66.33l-4.36-2.69-2.13 2.05c-.23.22-.62.1-.68-.22l-.77-4.08-4.05-1.34c-.35-.12-.39-.6-.06-.77L20.7 4.36zM9.95 13.75l.56 2.93.12-.01 1.15-3.01 5.92-5.35c.13-.12-.03-.31-.18-.22l-7.57 5.66z" />
+                          </svg>
+                        </span><span class="share-name">Telegram</span>
+                      </a>
+                      <a class="share-chip" data-share-link data-share-platform="linkedin" href="#" target="_blank"
+                        rel="noopener noreferrer" aria-label="Share result on LinkedIn" title="LinkedIn">
+                        <span class="share-mark" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M6.94 8.86H3.91V20h3.03V8.86zM5.43 7.34c.97 0 1.76-.79 1.76-1.76S6.4 3.82 5.43 3.82 3.67 4.61 3.67 5.58s.79 1.76 1.76 1.76zM20.33 20v-6.12c0-3.01-1.61-4.41-3.75-4.41-1.73 0-2.5.95-2.93 1.62V8.86h-3.03V20h3.03v-6.2c0-.33.02-.66.12-.9.24-.66.79-1.35 1.72-1.35 1.21 0 1.7.92 1.7 2.28V20h3.14z" />
+                          </svg>
+                        </span><span class="share-name">LinkedIn</span>
+                      </a>
+                      <button class="share-chip" id="copyLinkBtn" type="button" aria-label="Copy calculator link"
+                        title="Copy link">
+                        <span class="share-mark" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M10.6 13.4a1 1 0 0 1 0-1.4l2.8-2.8a4 4 0 1 1 5.66 5.66l-2.8 2.8a4 4 0 0 1-5.47.18l1.42-1.42a2 2 0 0 0 2.64-.17l2.8-2.8a2 2 0 0 0-2.83-2.83l-2.8 2.8a1 1 0 0 1-1.42 0zm2.8-2.8a1 1 0 0 1 0 1.4l-2.8 2.8a4 4 0 1 1-5.66-5.66l2.8-2.8a4 4 0 0 1 5.47-.18l-1.42 1.42a2 2 0 0 0-2.64.17l-2.8 2.8a2 2 0 0 0 2.83 2.83l2.8-2.8a1 1 0 0 1 1.42 0z" />
+                          </svg>
+                        </span><span class="share-name">Copy Link</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -1457,6 +1665,10 @@
     const heartbeatsEl = document.getElementById("heartbeats");
     const copyBtn = document.getElementById("copyBtn");
     const shareBtn = document.getElementById("shareBtn");
+    const shareMenu = document.getElementById("shareMenu");
+    const shareMenuPanel = document.getElementById("shareMenuPanel");
+    const shareLinks = document.querySelectorAll("[data-share-link]");
+    const copyLinkBtn = document.getElementById("copyLinkBtn");
     const datePickerEl = document.getElementById("datePicker");
     const pickerMonthWrapEl = document.getElementById("pickerMonthWrap");
     const pickerMonthEl = document.getElementById("pickerMonth");
@@ -1490,9 +1702,11 @@
     refInput.value = toInputDate(new Date());
 
     initPicker();
+    syncShareLinks();
     runCalculation({ scroll: false });
     copyBtn.addEventListener("click", copyResult);
-    shareBtn.addEventListener("click", shareResult);
+    shareBtn.addEventListener("click", toggleShareMenu);
+    copyLinkBtn.addEventListener("click", copyPageLink);
 
     dobInput.addEventListener("focus", () => openPicker(dobInput));
     refInput.addEventListener("focus", () => openPicker(refInput));
@@ -1554,6 +1768,7 @@
 
     document.addEventListener("click", (event) => {
       const target = event.target;
+      if (shareMenu && !shareMenu.contains(target)) closeShareMenu();
       if (!pickerMonthWrapEl.contains(target)) closeMonthDropdown();
       if (!pickerYearWrapEl.contains(target)) closeYearDropdown();
       if (!datePickerEl.contains(target) && !target.closest(".date-field")) {
@@ -1567,26 +1782,31 @@
         closeMonthDropdown();
         closeYearDropdown();
         closePicker();
+        closeShareMenu();
       }
     });
 
     window.addEventListener("resize", () => {
       if (!datePickerEl.hidden && activeInput) positionPicker(activeInput);
+      closeShareMenu();
     });
 
     window.addEventListener("scroll", () => {
       if (!datePickerEl.hidden && activeInput) positionPicker(activeInput);
+      closeShareMenu();
     }, true);
 
     function showError(message) {
       errorEl.textContent = message;
       errorEl.style.display = "block";
+      closeShareMenu();
     }
 
     function runCalculation(options = {}) {
       const { scroll = false } = options;
       errorEl.style.display = "none";
       resultEl.style.display = "none";
+      closeShareMenu();
 
       const dob = parseDate(dobInput.value);
       const ref = parseDate(refInput.value || toInputDate(new Date()));
@@ -1647,6 +1867,7 @@
       lifeStageEl.textContent = stage(diff.years);
       leapYearsEl.textContent = String(leapYearsLived(dob, ref));
       heartbeatsEl.textContent = formatHumanNumber(Math.round(totalMinutes * 80));
+      syncShareLinks();
 
       if (scroll) scrollToResult();
     }
@@ -1666,30 +1887,67 @@
       sidebarRight.style.paddingTop = "0";
     }
 
+    function getPageShareUrl() {
+      const canonical = document.querySelector('link[rel="canonical"]');
+      return canonical && canonical.href ? canonical.href : window.location.href.split("#")[0];
+    }
+
+    function syncShareLinks() {
+      const shareUrl = getPageShareUrl();
+      const shareText = buildResultText();
+      const encodedUrl = encodeURIComponent(shareUrl);
+      const encodedText = encodeURIComponent(shareText);
+
+      shareLinks.forEach((link) => {
+        const platform = link.dataset.sharePlatform;
+        if (platform === "facebook") {
+          link.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
+        } else if (platform === "x") {
+          link.href = "https://twitter.com/intent/tweet?url=" + encodedUrl + "&text=" + encodedText;
+        } else if (platform === "whatsapp") {
+          link.href = "https://wa.me/?text=" + encodeURIComponent(shareText + " " + shareUrl);
+        } else if (platform === "telegram") {
+          link.href = "https://t.me/share/url?url=" + encodedUrl + "&text=" + encodedText;
+        } else if (platform === "linkedin") {
+          link.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodedUrl;
+        }
+      });
+    }
+
+    async function copyPageLink() {
+      const copied = await writeClipboard(getPageShareUrl());
+      flashShareChip(copyLinkBtn, copied ? "Copied" : "Failed");
+    }
+
+    function toggleShareMenu(event) {
+      if (event) event.stopPropagation();
+      const shouldOpen = shareMenuPanel.hidden;
+      if (shouldOpen) openShareMenu();
+      else closeShareMenu();
+    }
+
+    function openShareMenu() {
+      syncShareLinks();
+      shareMenu.classList.add("is-open");
+      shareMenuPanel.hidden = false;
+      shareBtn.setAttribute("aria-expanded", "true");
+    }
+
+    function closeShareMenu() {
+      if (!shareMenu || !shareMenuPanel) return;
+      shareMenu.classList.remove("is-open");
+      shareMenuPanel.hidden = true;
+      shareBtn.setAttribute("aria-expanded", "false");
+    }
+
     async function copyResult() {
       const text = buildResultText();
       const copied = await writeClipboard(text);
       flashButton(copyBtn, copied ? "Copied!" : "Copy failed");
     }
 
-    async function shareResult() {
-      const text = buildResultText();
-      const shareUrl = window.location.href;
-      if (navigator.share) {
-        try {
-          await navigator.share({ title: "My Age Result", text, url: shareUrl });
-          flashButton(shareBtn, "Shared!");
-          return;
-        } catch (_error) { }
-      }
-
-      const tweetUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text + " " + shareUrl);
-      window.open(tweetUrl, "_blank", "noopener,noreferrer");
-      flashButton(shareBtn, "Opened share");
-    }
-
     function buildResultText() {
-      return "I am " + yearsEl.textContent + " years, " + monthsEl.textContent + " months, and " + daysEl.textContent + " days old! ðŸŽ‚ Calculated with Age Calculator";
+      return "I am " + yearsEl.textContent + " years, " + monthsEl.textContent + " months, and " + daysEl.textContent + " days old. Calculated with Age Calculator.";
     }
 
     function initPicker() {
@@ -2029,6 +2287,22 @@
       button.disabled = true;
       setTimeout(() => {
         button.textContent = original;
+        button.disabled = false;
+      }, 1100);
+    }
+
+    function flashShareChip(button, message) {
+      const label = button.querySelector(".share-name");
+      if (!label) {
+        flashButton(button, message);
+        return;
+      }
+
+      const original = label.textContent;
+      label.textContent = message;
+      button.disabled = true;
+      setTimeout(() => {
+        label.textContent = original;
         button.disabled = false;
       }, 1100);
     }
