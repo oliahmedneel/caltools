@@ -1237,7 +1237,20 @@
                     id="days">0</span> <span class="muted">days</span></div>
                 <div class="result-actions">
                   <button class="ghost-btn" id="copyBtn" type="button">Copy Result</button>
-                  <button class="ghost-btn" id="shareBtn" type="button">Share</button>
+                  <div class="share-section">
+    <p>Share Your Result:</p>
+    <div class="share-buttons">
+        <a href="javascript:void(0)" onclick="shareWhatsApp()" class="share-btn wa" title="Share on WhatsApp">
+            WhatsApp
+        </a>
+        <a href="javascript:void(0)" onclick="shareFacebook()" class="share-btn fb" title="Share on Facebook">
+            Facebook
+        </a>
+        <button onclick="copyLink()" class="share-btn copy" title="Copy Link">
+            Copy Link
+        </button>
+    </div>
+</div>
                 </div>
               </div>
 
