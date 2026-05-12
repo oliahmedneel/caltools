@@ -1,11 +1,4 @@
 User-agent: *
-Allow: /
-User-agent: GPTBot
-Disallow: /
-User-agent: Google-Extended
-Disallow: /
-User-agent: CCBot
-Disallow: /
-User-agent: facebookexternalhit
-Allow: /
-Sitemap: https://caltool.xyz/sitemap.xml
+Disallow: 
+Disallow: /cgi-bin/
+Sitemap: caltool.xyz/sitemap.xml
