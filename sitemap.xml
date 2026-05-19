@@ -1,142 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"> 
 <url>
-  <loc>http://caltool.xyz/index.html</loc>
+  <loc>https://caltool.xyz/index.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/about.html</loc>
+  <loc>https://caltool.xyz/about.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/privacy.html</loc>
+  <loc>https://caltool.xyz/privacy.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/terms.html</loc>
+  <loc>https://caltool.xyz/terms.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/contact.html</loc>
+  <loc>https://caltool.xyz/contact.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/age_calculator.html</loc>
+  <loc>https://caltool.xyz/age_calculator.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/bmi_calculator.html</loc>
+  <loc>https://caltool.xyz/bmi_calculator.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/bmr_calculator.html</loc>
+  <loc>https://caltool.xyz/bmr_calculator.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/percentage_calculator.html</loc>
+  <loc>https://caltool.xyz/percentage_calculator.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/loan_emi_calculator.html</loc>
+  <loc>https://caltool.xyz/loan_emi_calculator.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/date_difference.html</loc>
+  <loc>https://caltool.xyz/date_difference.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog.html</loc>
+  <loc>https://caltool.xyz/blog.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/guide-bmi-bmr.html</loc>
+  <loc>https://caltool.xyz/blog/guide-bmi-bmr.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/exact-age-between-dates.html</loc>
+  <loc>https://caltool.xyz/blog/exact-age-between-dates.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/tips-pay-off-loans-faster.html</loc>
+  <loc>https://caltool.xyz/blog/tips-pay-off-loans-faster.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/mastering-percentage-calculations.html</loc>
+  <loc>https://caltool.xyz/blog/mastering-percentage-calculations.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/biological-age-vs-chronological-age.html</loc>
+  <loc>https://caltool.xyz/blog/biological-age-vs-chronological-age.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/beyond-scale-bmi-body-fat.html</loc>
+  <loc>https://caltool.xyz/blog/beyond-scale-bmi-body-fat.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/metabolism-bmr-weight-loss.html</loc>
+  <loc>https://caltool.xyz/blog/metabolism-bmr-weight-loss.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/how-to-increase-bmr-metabolism.html</loc>
+  <loc>https://caltool.xyz/blog/how-to-increase-bmr-metabolism.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/history-calendar-systems-age.html</loc>
+  <loc>https://caltool.xyz/blog/history-calendar-systems-age.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/science-countdown-time-math.html</loc>
+  <loc>https://caltool.xyz/blog/science-countdown-time-math.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/debt-avalanche-debt-snowball-strategy.html</loc>
+  <loc>https://caltool.xyz/blog/debt-avalanche-debt-snowball-strategy.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/how-rising-interest-rates-affect-emi.html</loc>
+  <loc>https://caltool.xyz/blog/how-rising-interest-rates-affect-emi.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/math-sales-taxes-discounts-markups.html</loc>
+  <loc>https://caltool.xyz/blog/math-sales-taxes-discounts-markups.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/compound-interest-eighth-wonder-math.html</loc>
+  <loc>https://caltool.xyz/blog/compound-interest-eighth-wonder-math.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/plan-life-events-date-math.html</loc>
+  <loc>https://caltool.xyz/blog/plan-life-events-date-math.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
 <url>
-  <loc>http://caltool.xyz/blog/calorie-management-longevity-health.html</loc>
+  <loc>https://caltool.xyz/blog/calorie-management-longevity-health.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
 </url>
