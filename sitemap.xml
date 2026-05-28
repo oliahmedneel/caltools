@@ -41,6 +41,11 @@
   <lastmod>2026-05-12</lastmod>
 </url>
 <url>
+  <loc>https://caltool.xyz/tdee_calculator.html</loc>
+  <priority>1.0</priority>
+  <lastmod>2026-05-28</lastmod>
+</url>
+<url>
   <loc>https://caltool.xyz/percentage_calculator.html</loc>
   <priority>1.0</priority>
   <lastmod>2026-05-12</lastmod>
@@ -139,5 +144,10 @@
   <loc>https://caltool.xyz/blog/calorie-management-longevity-health.html</loc>
   <priority>0.8</priority>
   <lastmod>2026-05-19</lastmod>
+</url>
+<url>
+  <loc>https://caltool.xyz/blog/tdee-maintenance-calories-guide.html</loc>
+  <priority>0.8</priority>
+  <lastmod>2026-05-28</lastmod>
 </url>
 </urlset>

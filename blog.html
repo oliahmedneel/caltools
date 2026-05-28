@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Read expert articles on health calculations (BMI & BMR), financial loan planning (EMIs), date math, percentages, and practical everyday tips on CalTool Blog.">
-  <meta name="keywords" content="calculator blog, health tips, bmi bmr guide, loan emi planning, date difference, math hacks">
+    content="Read expert articles on health calculations (BMI, BMR & TDEE), financial loan planning (EMIs), date math, percentages, and practical everyday tips on CalTool Blog.">
+  <meta name="keywords" content="calculator blog, health tips, bmi bmr tdee guide, maintenance calories, loan emi planning, date difference, math hacks">
   <title>Blog - Calculator Tools</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,14 +24,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://caltool.xyz/blog.html">
   <meta property="og:title" content="Blog - Calculator Tools">
-  <meta property="og:description" content="Read expert articles on health calculations, financial loan planning, date math, percentages, and practical everyday tips.">
+  <meta property="og:description" content="Read expert articles on health calculations, TDEE and maintenance calories, financial loan planning, date math, percentages, and practical everyday tips.">
   <meta property="og:image" content="https://caltool.xyz/logo.webp">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://caltool.xyz/blog.html">
   <meta property="twitter:title" content="Blog - Calculator Tools">
-  <meta property="twitter:description" content="Read expert articles on health calculations, financial loan planning, date math, percentages, and practical everyday tips.">
+  <meta property="twitter:description" content="Read expert articles on health calculations, TDEE and maintenance calories, financial loan planning, date math, percentages, and practical everyday tips.">
   <meta property="twitter:image" content="https://caltool.xyz/logo.webp">
 
   <!-- Google Tag Manager -->
@@ -64,7 +64,7 @@
     "@type": "Blog",
     "name": "Calculator Tools Blog",
     "url": "https://caltool.xyz/blog.html",
-    "description": "Learn about Basal Metabolic Rate (BMR), Body Mass Index (BMI), Loan EMIs, percentages, and calendar date math with our informative blog posts.",
+    "description": "Learn about Basal Metabolic Rate (BMR), Total Daily Energy Expenditure (TDEE), Body Mass Index (BMI), Loan EMIs, percentages, and calendar date math with our informative blog posts.",
     "publisher": {
       "@type": "Organization",
       "name": "Calculator Tools",
@@ -1030,6 +1030,28 @@
   <script>
     // ── Blog Data Array ──
     const blogPosts = [
+      {
+        id: 17,
+        title: "TDEE Explained: How to Find Your Maintenance Calories",
+        slug: "tdee-maintenance-calories-guide",
+        category: "Health",
+        date: "May 28, 2026",
+        readTime: "5 min read",
+        author: "Dr. Sarah Jenkins",
+        excerpt: "Learn how Total Daily Energy Expenditure combines BMR and activity level to estimate maintenance calories for weight loss, maintenance, and muscle gain.",
+        bannerGradient: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        icon: "🥗",
+        content: `
+          <p class="lead">Total Daily Energy Expenditure (TDEE) is the estimated number of calories your body burns in a full day. It is one of the most useful starting points for planning fat loss, weight maintenance, or lean muscle gain.</p>
+          <p>TDEE starts with your Basal Metabolic Rate (BMR), then adds an activity multiplier for daily movement and exercise. That means two people with the same height, weight, age, and gender can have different calorie needs if one is sedentary and the other trains often.</p>
+          <h3>How TDEE is calculated</h3>
+          <p>First, calculate BMR using a formula such as Mifflin-St Jeor. Then multiply BMR by an activity factor such as 1.2 for sedentary, 1.375 for light activity, 1.55 for moderate activity, 1.725 for very active, or 1.9 for extra active lifestyles.</p>
+          <h3>How to use your result</h3>
+          <p>Your TDEE is your estimated maintenance calorie level. To lose fat, many people start around 300 to 500 calories below TDEE. To gain muscle, a smaller surplus of around 200 to 300 calories above TDEE is often more sustainable than a large surplus.</p>
+          <h3>Best next step</h3>
+          <p>Use our private <a href="tdee_calculator.html">TDEE Calculator</a> to estimate your maintenance calories instantly. For a deeper resting metabolism baseline, you can also compare it with our <a href="bmr_calculator.html">BMR Calculator</a>.</p>
+        `
+      },
       {
         id: 1,
         title: "The Ultimate Guide to Understanding Your BMI and BMR",
